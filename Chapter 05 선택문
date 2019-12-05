@@ -1,0 +1,289 @@
+실습 CH5_1 : 제시된 프로그램을 적절히 수정하여 실행하는 예제이다 .
+
+  char input;
+
+  
+	printf("영어로 인사하는 법을 배우겠습니다.\n") ;
+	printf("아침인사 = m , 오후인사 =a \n");
+	printf("저녁인사 = e , 취침인사 =n \n");
+	scanf("%c",&input);
+
+
+	switch(input){
+	case 'm' : printf("아침에 GOOD MORNING! \n");  
+		break;
+	case 'a':  printf("오후에 Good Afternoon! \n");
+		break;
+	case 'e' :  printf("저녁에 Good Evening! \n");
+		break;
+	case 'n' :  printf("잠들기 전 Good Night! \n"); >>>>>>>case를 아침m 오후 a 저녁e 취침 n으로 나눠주고 
+                                                               그 케이스에 따라 출력되는 문자를 구별해준다. 
+		break;
+
+    defalut :  printf("소문자 m,a,e,n 중 하나를 입력하세요. \n"); 
+	}
+	if(input =='a' | input=='m' | input=='e' | input=='n'){
+		printf("Well done. See you again \n",input);
+	}
+	else
+		printf("Sorry, try again \n",input);
+	return 0;          >>>>>4가지 케이스를 입력받고 앞서 선언된 케이스를 입력할 시 지정된 문자가 나오도록 설정                                    해주고 그 외를 입력했을 때 다른 출력문이 나오도록 if/else 문을 사용해준다. 
+
+
+
+
+
+
+
+
+실습CH5_2
+
+제시된 기능을 수행하는 프로그램을 작성하는 예제이다. 
+if else문을 사용하여 작성해본 후 조건연산자로도 작성해본다. 
+
+int a,b,c,max,mid;
+
+
+	printf("수를 입력하십시오 : \n");
+	scanf("%d,%d,%d", &a,&b,&c);
+
+  
+	a>b?(a>c?(b>c?max=a, mid =b:max=a,mid=c):max=c, mid=a) : b>c?(c>a?max=b,mid=c:max=b,mid=a ) :max=c,mid=b ;
+	printf("최댓값 : %d, 중간값 : %d \n", max,mid);
+	return 0 ;
+	*/
+            >>>조건 연산자를 이용하여 작성한 프로그램이다. 조건연산자 안의 괄호 지정을 제대로 해주는 것이 중요하다.
+               (이런 복잡한 경우엔 직접 손으로 써서 경우를 나눠보는 것이 도움이 된다. )
+
+	int a,b,c,max,mid;
+	/*
+
+	printf("수를 입력하십시오 : \n");
+	scanf("%d,%d,%d", &a,&b,&c);
+
+	if(a>b)
+
+		if(a>c)
+			if(b>c)
+		    printf("최댓값 = %d, 중간값 %d \n",a,b);
+
+			else
+			 printf("최댓값 = %d, 중간값 %d \n",a,c);
+
+		else
+			 printf("최댓값 = %d, 중간값 %d \n",c,a);
+	else
+		if(b>c)
+			if(c>a)
+				 printf("최댓값 = %d, 중간값 %d \n",b,c);
+			else
+				 printf("최댓값 = %d, 중간값 %d \n",b,a);
+		else
+			 printf("최댓값 = %d, 중간값 %d \n",c,b);   >>>>>if/else 문을 사용하여 작성한 프로그램이다. 이경우에는 조건연산자보다는 덜 복잡하지만 if문 안에 다시 if else문을 작성해야한다. 
+
+	
+
+
+
+CH 5_3 
+
+제시된 조건에 맞는 프로그램을 작성하는 것이다. 
+1개 실수를 입력받아 실수의 범위를 확인하고 만족하면 새해 후 실수 번째 날은 x월 x일이다로 출력한다 또는 새해 후 a번째 날은 x월x일 x시x분이다로 출력하는 프로그램을 작성한다. 
+
+이 경우에는 1~12월 까지 일일이 경우의 수를 나눠서 해야 하므로 아주 복잡한 문제이다. 
+
+
+
+
+float num;
+
+	int day,h,min=0;
+
+	
+
+	printf("수를 입력하세요 \n");
+	scanf("%f",&num);
+
+	if(num<=0||num>365)
+
+	{
+
+		printf("범위 안의 수를 입력해주세요.\n");
+
+		return 0;
+
+	}
+
+ 
+
+	if(num>=31+28+31+30+31+30+31+31+30+31+30)//12월
+
+	{
+
+		day=int(num)-(31+28+31+30+31+30+31+31+30+31+30)+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 12월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	else if(num>=31+28+31+30+31+30+31+31+30+31)//11월
+
+	{
+
+		day=int(num)-(31+28+31+30+31+30+31+31+30+31)+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 11월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	else if(num>=31+28+31+30+31+30+31+31+30)//10월
+
+	{
+
+		day=int(num)-(31+28+31+30+31+30+31+31+30)+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 10월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	else if(num>=31+28+31+30+31+30+31+31)//9월
+
+	{
+
+		day=int(num)-(31+28+31+30+31+30+31+31)+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 9월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	else if(num>=31+28+31+30+31+30+31)//8월
+
+	{
+
+		day=int(num)-(31+28+31+30+31+30+31)+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 8월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	else if(num>=31+28+31+30+31+30)//7월
+
+	{
+
+		day=int(num)-(31+28+31+30+31+30)+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 7월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	else if(num>=31+28+31+30+31)//6월
+
+	{
+
+		day=int(num)-(31+28+31+30+31)+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 6월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	else if(num>=31+28+31+30)//5월
+
+	{
+
+		day=int(num)-(31+28+31+30)+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 5월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	else if(num>=31+28+31)//4월
+
+	{
+
+		day=int(num)-(31+28+31)+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 4월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	else if(num>=31+28)//3월
+
+	{
+
+		day=int(num)-(31+28)+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 3월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	else if(num>=31)//2월
+
+	{
+
+		day=int(num)-31+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 2월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	else//(num<31) 1월
+
+	{
+
+		day=int(num)+1;
+
+		h=int((num-int(num))*24);
+
+		min=int(((num-int(num))*24-h)*60);
+
+		printf("새해 후 %f번째 날은 1월 %d일 %d시 %d분이다.",num,day,h,min);
+
+	}
+
+	return 0;
+
+}
