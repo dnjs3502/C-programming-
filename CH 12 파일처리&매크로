@@ -1,0 +1,120 @@
+CH12_1
+
+#include<stdio.h>
+#include<stdlib.h>
+#define AREA(X) (3.14*(X)*(X))
+int main(void)
+{
+	FILE*fp;
+	int n=10;
+	if((fp=fopen("basic.txt","wb"))==NULL)
+	{
+		printf("파일을 열수 없습니다.\n");
+		exit(1);
+		
+	}
+	printf("반지름 10인 원의 넓이 =%6.2f\n",AREA(n));
+	fwrite(&n,sizeof(n),1,fp);
+	fclose(fp);
+	return 0;
+}
+
+<프로그램 설명>
+
+
+반지름을 N으로 받았으므로 4000에서 10으로 고쳐준다. 
+그리고 fwirte에서 n앞에 &를 붙여줘야한다. (파일 입출력 함수의 개념)
+
+
+
+
+
+CH12_2 
+
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct bible {
+	char book[20];
+	int chapter;
+	char old_new[20];
+} bible;
+void max(bible* m, int* max, int* min);
+int main(void)
+{
+	struct bible m[4];
+	char book[20];
+	int chapter;
+	char old_new[20];
+	int i;
+	int kmax;
+	int kmin;
+	FILE* f;
+	f=fopen("Bibleinfo.txt", "r");
+	if (f == NULL) {
+		printf("파일 열기 실패. \n");
+		exit(1);
+	}
+	for(i = 0; i < 4; i++)
+	{
+		
+		fscanf(f, "%s %d %s", &m[i].book, &m[i].chapter, &m[i].old_new);
+		
+	}
+	fclose(f);        
+	for (i = 0; i < 4; i++)
+	{
+		
+		printf("%s %d %s\n", m[i].book, m[i].chapter, m[i].old_new);
+	}
+	max(m, &kmax, &kmin);
+	printf("%s가 %d 챕터로 최대, %s가 %d 챕터로 최소 \n", m[kmax].book, m[kmax].chapter, m[kmin].book, m[kmin].chapter);
+	return 0;
+}
+void max(bible* m, int* max, int* min)
+{
+	int j;
+	int kmax;
+	int kmin;
+	kmax = m[0].chapter;
+	kmin = m[0].chapter;
+	*max = 0;
+	*min = 0;
+	for(j = 1; j <= 3; j++) {
+		if(m[j].chapter >= kmax) {
+			*max = j;
+		}
+		else {
+			// 아무것도 하지 않음
+		}
+	}
+	for(j = 1; j <= 3; j++) {
+		if(m[j].chapter < kmin) {
+			*min = j;
+		}
+		else {
+			// 아무것도 하지 않음
+		}
+	}
+
+
+<프로그램 설명>
+
+1. 먼저 bibleinfo의 텍스트 문서를 윈도우 탐색 파일 열기를 통해 저장해준다. 
+2. 저번시간과 동일하게 구조체 선언을 해준다. 
+3. FILE* f;
+	f=fopen("Bibleinfo.txt", "r"); 
+
+   : Bibleinfo라는 제목의 텍스트파일을 읽어온다. 
+if문을 이용해 텍스트파일이 없거나 불러오는 걸 실패하게 된다면 “파일열기실패”라는 문구를 출력하도록 하고 for문과 fscanf을 이용해서 앞서 구조체 선언을 해주었던 것을 차례로 읽어오도록 한 뒤 
+
+fclose를 통해 해당 작업들을 닫은뒤 텍스트파일을 결과창에 출력하도록 한다. 
+
+이제 텍스트파일에서 챕터에 해당하는 부분의 최대최소를 출력하는 함수를 제작한다. 
+
+(알고리즘은 이전 예제와 동일하다.)
+
+
+
+
+
+	
